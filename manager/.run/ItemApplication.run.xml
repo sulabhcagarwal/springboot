@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ItemApplication" type="Application" factoryName="Application">
+    <envs>
+      <env name="server.port" value="9001" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.shopping.Items.ItemsApplication" />
+    <module name="Items" />
+    <option name="PROGRAM_PARAMETERS" value="-Xms300m -Xmx500m" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

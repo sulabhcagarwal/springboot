@@ -1,0 +1,44 @@
+package com.shopping.order.controller;
+
+import com.shopping.order.entity.Cart;
+import com.shopping.order.request.OrderRequest;
+import com.shopping.order.service.OrderService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1")
+public class OrderController {
+
+    private final OrderService orderService;
+    private final Logger logger = LogManager.getLogger(OrderController.class);
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<Cart>> getShoppingList(){
+        try{
+            return ResponseEntity.ok(this.orderService.getAllOrders());
+        }catch (Exception e){
+            logger.error("Error while getting orders", e);
+            return ResponseEntity.internalServerError().build();
+        }
+
+    }
+
+    @PostMapping("/orders")
+    public ResponseEntity<Cart> addOrder(@RequestBody OrderRequest orderRequest){
+        try{
+            return ResponseEntity.ok(this.orderService.updateOrder(orderRequest));
+        } catch (Exception e) {
+            logger.error("Error while adding order", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+}

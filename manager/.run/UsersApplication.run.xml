@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UsersApplication" type="Application" factoryName="Application">
+    <envs>
+      <env name="server.port" value="9002" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.shopping.users.UsersApplication" />
+    <module name="Users" />
+    <option name="PROGRAM_PARAMETERS" value="-Xms300m -Xmx500m" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
