@@ -35,9 +35,29 @@ public class OrderController {
     @PostMapping("/orders")
     public ResponseEntity<Cart> addOrder(@RequestBody OrderRequest orderRequest){
         try{
+            return ResponseEntity.ok(this.orderService.addOrder(orderRequest));
+        } catch (Exception e) {
+            logger.error("Error while adding order", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping("/orders")
+    public ResponseEntity<Cart> updateOrder(@RequestBody OrderRequest orderRequest){
+        try{
             return ResponseEntity.ok(this.orderService.updateOrder(orderRequest));
         } catch (Exception e) {
             logger.error("Error while adding order", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping("/orders")
+    public ResponseEntity<Boolean> deleteOrder(@RequestBody OrderRequest orderRequest){
+        try{
+            return ResponseEntity.ok(this.orderService.deleteOrder(orderRequest));
+        } catch (Throwable e) {
+            logger.error("Error while deleting order", e);
             return ResponseEntity.internalServerError().build();
         }
     }

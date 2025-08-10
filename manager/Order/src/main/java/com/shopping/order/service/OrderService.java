@@ -5,6 +5,7 @@ import com.shopping.order.entity.Item;
 import com.shopping.order.repository.OrderRepository;
 import com.shopping.order.request.OrderRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +25,8 @@ public class OrderService {
         return this.orderRepository.findAll();
     }
 
-    public Cart updateOrder(OrderRequest orderRequest){
+    @Transactional
+    public Cart addOrder(OrderRequest orderRequest){
         var itemSet = new HashSet<Item>();
         orderRequest.itemIds().stream().forEach(id -> {
             var item = new Item();
@@ -36,5 +38,24 @@ public class OrderService {
         cartDao.setUserId(orderRequest.userId());
         cartDao.setItems(itemSet);
         return this.orderRepository.save(cartDao);
+    }
+
+    @Transactional
+    public Cart updateOrder(OrderRequest orderRequest){
+        var itemSet = new HashSet<Item>();
+        orderRequest.itemIds().stream().forEach(id -> {
+            var item = new Item();
+            item.setItemId(id);
+            itemSet.add(this.itemService.saveItem(item));
+        });
+        var cartDao = this.orderRepository.findById(orderRequest.id()).get();
+        cartDao.getItems().addAll(itemSet);
+        return this.orderRepository.save(cartDao);
+    }
+
+    public boolean deleteOrder(OrderRequest orderRequest){
+        var cartDao = this.orderRepository.findById(orderRequest.id()).get();
+        this.orderRepository.delete(cartDao);
+        return true;
     }
 }

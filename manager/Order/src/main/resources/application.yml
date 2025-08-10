@@ -3,7 +3,7 @@ spring:
   name: manager
   datasource:
 #    url: jdbc:h2:mem:mydb
-    url: jdbc:h2:file:/data/order
+    url: jdbc:h2:file:/home/sulabh/Documents/CDA/interview/Germany/AlephAlpha/springboot/manager/h2db/order
     username: sa
     password: password
     driverClassName: org.h2.Driver

@@ -27,6 +27,10 @@ public class Cart {
         return cartId;
     }
 
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
+    }
+
     public Boolean getExecuted() {
         return executed;
     }
