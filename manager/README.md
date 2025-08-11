@@ -10,6 +10,9 @@ Overview:
 * java 21+
 * maven 3+
 
+## Update config
+* Update DB file path on ~/manager/Order/src/main/resources/application.yml where url is currently looks like: jdbc:h2:file:/home/sulabh/Documents/CDA/interview/Germany/AlephAlpha/springboot/manager/h2db/order
+
 ## Build
 
 Use the package manager [maven](https://maven.apache.org/install.html) to build the project.
