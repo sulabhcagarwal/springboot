@@ -33,5 +33,5 @@ java -jar ~/manager/Order/target/Order-0.0.1-SNAPSHOT.jar
 * please use service config file (~/manager/.run/OrderApplication.run.xml) to run the services
   
 ## Usage
-Open [Order Service Swagger](http://localhost:9000/swagger-ui/index.html) on browser  
+Open [Order Service Swagger](http://localhost:8080/swagger-ui/index.html) on browser  
 Service contain 4 URLs for creating/updating/deleting/query the cart items.
