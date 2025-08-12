@@ -1,8 +1,11 @@
 package com.shopping.order.controller;
 
 import com.shopping.order.entity.Cart;
+import com.shopping.order.request.CartResponse;
 import com.shopping.order.request.OrderRequest;
 import com.shopping.order.service.OrderService;
+import com.shopping.order.validators.OrderRequestValidator;
+import com.shopping.order.validators.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +18,12 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final OrderRequestValidator orderRequestValidator;
     private final Logger logger = LogManager.getLogger(OrderController.class);
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, OrderRequestValidator orderValidator) {
         this.orderService = orderService;
+        this.orderRequestValidator = orderValidator;
     }
 
     @GetMapping("/orders")
@@ -33,8 +38,11 @@ public class OrderController {
     }
 
     @PostMapping("/orders")
-    public ResponseEntity<Cart> addOrder(@RequestBody OrderRequest orderRequest){
+    public ResponseEntity<CartResponse> addOrder(@RequestBody OrderRequest orderRequest){
         try{
+            if(!orderRequestValidator.validate(orderRequest)){
+                return ResponseEntity.badRequest().build();
+            }
             return ResponseEntity.ok(this.orderService.addOrder(orderRequest));
         } catch (Exception e) {
             logger.error("Error while adding order", e);
