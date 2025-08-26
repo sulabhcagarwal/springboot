@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 @Controller
 public class ItemCache {
@@ -16,6 +17,7 @@ public class ItemCache {
         Item item = new Item();
         item.setItemId(1);
         items.put(item.getItemId(), item);
+        Executors.newVirtualThreadPerTaskExecutor();
     }
 
     public boolean itemAvailable(Integer itemId){
